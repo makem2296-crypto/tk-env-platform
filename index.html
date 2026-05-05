@@ -26,13 +26,11 @@
             margin: 0;
             padding: 0;
             font-family: 'Helvetica Neue', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-            /* 深邃空間感漸層背景 */
             background: radial-gradient(circle at 50% 0%, #1e2433 0%, #0a0c10 100%);
             color: var(--text-main);
             min-height: 100vh;
         }
 
-        /* 標題區塊：精品留白美學 */
         .header {
             text-align: center;
             padding: 50px 20px 40px;
@@ -50,14 +48,12 @@
             font-size: 2.8rem; 
             letter-spacing: 4px; 
             font-weight: 600;
-            /* 金屬質感漸層文字 */
             background: linear-gradient(135deg, #ffffff 0%, #a0a5b0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 10px 30px rgba(255,255,255,0.1);
         }
         
-        /* 寬敞網格佈局 */
         .container {
             display: grid;
             grid-template-columns: 1fr 2fr; 
@@ -68,7 +64,6 @@
         }
         .card-full-width { grid-column: 1 / -1; }
 
-        /* 毛玻璃懸浮卡片設計 (Glassmorphism) */
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -76,13 +71,12 @@
             border-radius: 24px;
             padding: 35px;
             border: 1px solid var(--card-border);
-            border-top: 1px solid rgba(255,255,255,0.15); /* 頂部高光 */
+            border-top: 1px solid rgba(255,255,255,0.15);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
         }
-        .card:hover { transform: translateY(-5px); }
         
         .card h3 { 
             margin: 0 0 25px 0; 
@@ -104,7 +98,6 @@
             box-shadow: 0 0 10px #4393c3;
         }
         
-        /* 即時數據霓虹特效 */
         .data-display { text-align: center; margin: auto 0; }
         .moisture-value { 
             font-size: 7rem; 
@@ -113,7 +106,7 @@
             line-height: 1; 
             margin-bottom: 25px;
             font-family: 'Arial', sans-serif;
-            text-shadow: 0 0 30px rgba(0, 230, 118, 0.4); /* 綠光暈 */
+            text-shadow: 0 0 30px rgba(0, 230, 118, 0.4); 
         }
         .status { 
             font-size: 1.4rem; 
@@ -138,7 +131,6 @@
             animation: pulse-red 2s infinite; 
         }
         
-        /* 地圖與圖表區域精緻化 */
         #map { height: 400px; border-radius: 16px; width: 100%; border: 1px solid var(--card-border);}
         .chart-container { height: 500px; width: 100%; }
 
@@ -146,6 +138,27 @@
             0% { box-shadow: 0 0 20px rgba(255, 61, 0, 0.2); } 
             50% { box-shadow: 0 0 40px rgba(255, 61, 0, 0.6); } 
             100% { box-shadow: 0 0 20px rgba(255, 61, 0, 0.2); } 
+        }
+
+        /* ================= 📱 手機版 RWD 響應式魔法 ================= */
+        @media (max-width: 800px) {
+            .header { padding: 30px 15px 20px; }
+            .header h1 { font-size: 1.8rem; letter-spacing: 2px; }
+            .header h2 { font-size: 0.8rem; letter-spacing: 4px; }
+            
+            .container {
+                grid-template-columns: 1fr; /* 強制變為單欄直排 */
+                padding: 0 15px 30px;
+                gap: 20px;
+            }
+            .card { padding: 20px; border-radius: 16px; }
+            
+            .moisture-value { font-size: 4.5rem; }
+            .moisture-value span { font-size: 2rem !important; } /* 縮小 % 符號 */
+            .status { font-size: 1rem; padding: 10px 15px; }
+            
+            #map { height: 300px; }
+            .chart-container { height: 350px; } /* 縮小圖表高度避免佔滿整個手機螢幕 */
         }
     </style>
 </head>
@@ -185,16 +198,14 @@
         const channelID = '3211524'; 
         const readAPIKey = '5Z5AS4AK5SBVOFIF'; 
 
-        // 初始化 Leaflet 地圖 (取消所有預設的醜醜邊框)
         const tkLat = 25.175629;
         const tkLon = 121.450675;
         const map = L.map('map', {zoomControl: false}).setView([tkLat, tkLon], 16);
         
         L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '' // 隱藏版權文字讓畫面更純淨
+            attribution: '' 
         }).addTo(map);
 
-        // 自訂精緻的地圖標記
         const customIcon = L.divIcon({
             className: 'custom-div-icon',
             html: "<div style='background-color:#00E676; width:15px; height:15px; border-radius:50%; border:3px solid #fff; box-shadow: 0 0 15px #00E676;'></div>",
@@ -203,12 +214,12 @@
         });
         L.marker([tkLat, tkLon], {icon: customIcon}).addTo(map);
 
-        // Plotly 頂級質感主題
+        // Plotly RWD 自動適應設定 (新增 responsive: true)
         const elegantLayout = {
             paper_bgcolor: 'rgba(0,0,0,0)',
             plot_bgcolor: 'rgba(0,0,0,0)',
-            font: { color: '#9CA3AF', size: 13, family: 'Helvetica Neue' },
-            margin: { t: 10, b: 50, l: 50, r: 20 },
+            font: { color: '#9CA3AF', size: 12, family: 'Helvetica Neue' },
+            margin: { t: 10, b: 40, l: 40, r: 10 }, // 縮小圖表邊界留白
             xaxis: { gridcolor: 'rgba(255,255,255,0.05)', zerolinecolor: 'rgba(255,255,255,0.1)' },
             yaxis: { gridcolor: 'rgba(255,255,255,0.05)', zerolinecolor: 'rgba(255,255,255,0.1)' },
             hoverlabel: { bgcolor: '#1e2433', font: { color: '#fff' } }
@@ -227,11 +238,9 @@
                     const moistures = data.feeds.map(f => parseInt(f.field1));
                     const latestMoisture = moistures[moistures.length - 1];
 
-                    // 更新即時數字
                     const moistureEl = document.getElementById('moisture');
                     const statusEl = document.getElementById('pump-status');
                     
-                    // 讓 % 符號縮小，提升排版質感
                     moistureEl.innerHTML = latestMoisture + '<span style="font-size: 3.5rem; color: rgba(255,255,255,0.5); margin-left: 10px;">%</span>';
                     
                     if (latestMoisture < 30) {
@@ -246,19 +255,17 @@
                         statusEl.className = 'status safe';
                     }
 
-                    // 繪製優雅的貝茲曲線歷史圖
                     const traceLine = {
                         x: times,
                         y: moistures,
                         type: 'scatter',
                         mode: 'lines',
-                        line: { color: '#00D0FF', width: 3, shape: 'spline', smoothing: 1.3 }, // 優雅的平滑曲線
+                        line: { color: '#00D0FF', width: 3, shape: 'spline', smoothing: 1.3 }, 
                         fill: 'tozeroy',
-                        fillcolor: 'rgba(0, 208, 255, 0.08)' // 極淡的高級感漸層
+                        fillcolor: 'rgba(0, 208, 255, 0.08)' 
                     };
                     Plotly.newPlot('line-chart', [traceLine], elegantLayout, {responsive: true, displayModeBar: false});
 
-                    // 繪製等高線圖
                     const x_data = []; const y_data = []; const z_data = [];
                     for(let i = 0; i < 40; i++) {
                         let px = Math.random() * 100; 
@@ -276,7 +283,7 @@
                         type: 'contour',
                         colorscale: [
                             [0.0, '#4a0c16'], [0.2, '#962b2b'], [0.4, '#c98555'], 
-                            [0.6, '#3a7285'], [0.8, '#26598c'], [1.0, '#102a4a'] // 降低明度，色彩更沉穩
+                            [0.6, '#3a7285'], [0.8, '#26598c'], [1.0, '#102a4a'] 
                         ],
                         contours: { coloring: 'heatmap', showlines: true, smoothing: 1.3 }, 
                         colorbar: { title: {text: '濕度 (%)', font: {color: '#9CA3AF'}}, tickfont: {color: '#9CA3AF'} },
@@ -284,8 +291,8 @@
                     };
                     
                     const contourLayout = Object.assign({}, elegantLayout);
-                    contourLayout.xaxis = { title: '東西向距離 (公尺)', range: [0, 100], gridcolor: 'rgba(255,255,255,0.05)' };
-                    contourLayout.yaxis = { title: '南北向距離 (公尺)', range: [0, 100], gridcolor: 'rgba(255,255,255,0.05)' };
+                    contourLayout.xaxis = { title: '東西(m)', range: [0, 100], gridcolor: 'rgba(255,255,255,0.05)' };
+                    contourLayout.yaxis = { title: '南北(m)', range: [0, 100], gridcolor: 'rgba(255,255,255,0.05)' };
 
                     Plotly.newPlot('contour-chart', [traceContour], contourLayout, {responsive: true, displayModeBar: false});
                 }
