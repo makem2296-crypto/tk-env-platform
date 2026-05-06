@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>淡江大學環境平台 | 智慧土壤溼度檢測系統</title>
+    
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 FontAwesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入 Noto Sans TC 字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Noto Sans TC', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 900: '#14532d' },
+                        tech: { 50: '#eff6ff', 500: '#3b82f6', 900: '#1e3a8a' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #f8fafc; color: #334155; overflow-x: hidden; }
+        
+        /* 滾動浮現動畫 */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 內容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+            border-color: #cbd5e1;
+        }
+
+        /* 圖片容器 */
+        .img-container {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: #e2e8f0;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        .img-container:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="font-bold tracking-wider text-slate-800">
+                TKU <span class="text-brand-600">ENV-PLATFORM</span>
+            </div>
+            <div class="text-sm font-medium text-slate-500 hidden md:block">專題成果報告 | 智慧土壤溼度檢測系統</div>
+        </div>
+    </nav>
+
+    <!-- 1. 封面 -->
+    <section class="min-h-screen flex items-center pt-20 bg-gradient-to-b from-white to-slate-50">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-element">
+            <div>
+                <span class="inline-block px-4 py-1.5 rounded-full bg-brand-50 text-brand-600 text-xs font-bold tracking-widest mb-6 border border-brand-100">
+                    ENVIRONMENTAL IoT PLATFORM
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6">
+                    淡江大學環境平台<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-tech-500">智慧土壤溼度檢測系統</span>
+                </h1>
+                <p class="text-lg text-slate-500 font-medium mb-10 leading-relaxed">
+                    完美整合環境工程與物聯網科技。<br>從泥土深處的感測探針，到雲端的大數據決策大腦。
+                </p>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="#architecture" class="px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-brand-600 transition shadow-xl">
+                        系統架構解析 <i class="fa-solid fa-arrow-down ml-2"></i>
+                    </a>
+                    <a href="#live-demo" class="px-8 py-4 bg-white text-slate-800 border border-slate-200 rounded-full font-bold hover:bg-slate-50 transition shadow-sm">
+                        <i class="fa-solid fa-play text-brand-500 mr-2"></i> 觀看實機展示
+                    </a>
+                </div>
+            </div>
+            <div class="img-container h-[400px] lg:h-[550px]">
+                <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1200&q=80" alt="智慧植栽環境">
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 硬體架構解剖 -->
+    <section id="architecture" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center reveal-element">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">實體世界：邊緣硬體設備職責</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">硬體模組是系統的感官與肌肉，負責在第一線收集物理數據並執行實體澆灌動作。</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-element">
+                <div class="img-container h-[450px]">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80" alt="ESP32 與感測硬體">
+                </div>
+                <div class="space-y-6">
+                    <div class="content-card p-6 border-l-4 border-l-amber-500">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-amber-500 text-xl"><i class="fa-solid fa-microchip"></i></div>
+                            <h3 class="text-xl font-bold text-slate-800">ESP32 (系統大腦)</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed pl-16">
+                            <strong>做什麼事：</strong> 負責邊緣運算 (Edge Computing)。讀取感測器傳來的電壓訊號、執行邏輯判斷，並透過內建 Wi-Fi 模組連接網路。
+                        </p>
+                    </div>
+                    <div class="content-card p-6 border-l-4 border-l-brand-500">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center text-brand-500 text-xl"><i class="fa-solid fa-leaf"></i></div>
+                            <h3 class="text-xl font-bold text-slate-800">電容式土壤感測器 (神經網絡)</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed pl-16">
+                            <strong>做什麼事：</strong> 捨棄易生鏽的傳統電阻探針，利用「介電常數變化」感測土壤水分，並轉換為類比電壓訊號傳送給大腦。
+                        </p>
+                    </div>
+                    <div class="content-card p-6 border-l-4 border-l-rose-500">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-full bg-rose-50 flex items-center justify-center text-rose-500 text-xl"><i class="fa-solid fa-water"></i></div>
+                            <h3 class="text-xl font-bold text-slate-800">繼電器與抽水馬達 (執行肌肉)</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed pl-16">
+                            <strong>做什麼事：</strong> 接收 ESP32 的 5V 數位高電位指令後，安全驅動大電流抽水馬達，進行物理性的精準給水動作。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 軟體架構解剖 -->
+    <section class="py-24 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            <div class="text-center reveal-element">
+                <h2 class="text-3xl font-bold text-white mb-4">數位維度：軟體平台與演算法職責</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">軟體是賦予硬體靈魂的關鍵。從韌體控制、雲端儲存到資料分析，各司其職。</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-element">
+                <div class="space-y-6 order-2 lg:order-1">
+                    <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-tech-400 mb-2"><i class="fa-solid fa-code mr-2"></i>C++ (底層韌體)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            <strong>職責：</strong> 採用 <code>millis()</code> 異步計時寫法，確保等待連線時「不阻塞」硬體作動；並負責將數據打包成 HTTP 封包上傳。
+                        </p>
+                    </div>
+                    <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-emerald-400 mb-2"><i class="fa-solid fa-database mr-2"></i>ThingSpeak (雲端資料庫)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            <strong>職責：</strong> 扮演「時序數據庫」。24 小時接收數據，打上精確時間戳記並永久儲存，提供 API 供外部調用。
+                        </p>
+                    </div>
+                    <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-amber-400 mb-2"><i class="fa-brands fa-html5 mr-2"></i>HTML/JS (戰情室前端)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            <strong>職責：</strong> 視覺介面。透過 JS 即時撈取 API，將數字渲染成精緻的歷史折線圖與地圖座標燈號。
+                        </p>
+                    </div>
+                    <div class="bg-slate-800/50 border border-slate-700 rounded-2xl p-6">
+                        <h3 class="text-lg font-bold text-[#00c300] mb-2"><i class="fa-brands fa-line mr-2"></i>LINE Messaging API (通報系統)</h3>
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            <strong>職責：</strong> 警報系統。由 ESP32 底層強制繞過 SSL 憑證驗證，直接將異常 JSON 封包推播至管理員手機。
+                        </p>
+                    </div>
+                </div>
+                <div class="img-container h-[500px] border border-slate-700 order-1 lg:order-2">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80" alt="雲端與網絡傳輸">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 高階資料科學 -->
+    <section class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">高階水文資料分析</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">跳脫簡單的閾值判斷，本專題導入 Python 進行嚴謹的環境工程分析。</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-element">
+                <div class="img-container h-[400px]">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80" alt="數據分析與可視化">
+                </div>
+                <div class="space-y-6">
+                    <div class="content-card p-8">
+                        <h3 class="text-xl font-bold text-tech-600 mb-3"><i class="fa-brands fa-python mr-2"></i>SciPy 空間內插演算法</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            <strong>技術原理：</strong> 採用「三次空間內插法 (Cubic Interpolation)」，結合微地形梯度，運算並展開為 <span class="font-bold text-slate-800">100x100m 區域的微水文等高線分佈圖</span>，精準定位乾燥熱區。
+                        </p>
+                    </div>
+                    <div class="content-card p-8">
+                        <h3 class="text-xl font-bold text-rose-600 mb-3"><i class="fa-solid fa-chart-line mr-2"></i>蒸散斜率與乾燥速率模型</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            <strong>技術原理：</strong> 利用 Pandas 撈取歷史時序資料，精準計算出土壤的「乾燥速率 (%/hr)」，協助評估植物的<span class="font-bold text-slate-800">自然蒸散壓力 (ET)</span>，以動態調整澆灌策略。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LIVE DEMO -->
+    <section id="live-demo" class="py-24 bg-[#0a0f1c] text-white relative overflow-hidden">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10 reveal-element">
+            <div class="text-center mb-12">
+                <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-brand-400 text-xs font-bold tracking-widest mb-4 border border-white/20">
+                    <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span> SYSTEM ONLINE
+                </span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">即時戰情室 實境展示</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    您可以直接在下方視窗中滑動、點擊圖表，檢視由現場感測器即時傳回的數據。
+                </p>
+            </div>
+            <div class="w-full h-[600px] md:h-[750px] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-slate-700 bg-slate-800 relative group">
+                <div class="w-full h-12 bg-slate-800/90 backdrop-blur-md border-b border-slate-700 flex items-center px-4 absolute top-0 z-20">
+                    <div class="flex gap-2">
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#ff5f56]"></div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]"></div>
+                        <div class="w-3.5 h-3.5 rounded-full bg-[#27c93f]"></div>
+                    </div>
+                    <div class="mx-auto flex items-center gap-2 px-4 py-1.5 bg-slate-900 rounded-md text-xs font-mono text-slate-400 border border-slate-700/50">
+                        <i class="fa-solid fa-lock text-[10px]"></i> makem2296-crypto.github.io/tk-env-platform
+                    </div>
+                    <a href="https://makem2296-crypto.github.io/tk-env-platform/" target="_blank" class="text-xs text-slate-400 hover:text-white transition flex items-center gap-1">
+                        新開分頁 <i class="fa-solid fa-external-link-alt"></i>
+                    </a>
+                </div>
+                <iframe src="https://makem2296-crypto.github.io/tk-env-platform/" class="w-full h-full pt-12 bg-slate-900" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 資料真實性與演算法驗證聲明 -->
+    <section class="py-16 bg-slate-800 text-white border-y border-slate-700">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-8 reveal-element">
+                <div class="flex-shrink-0 text-amber-400 text-5xl">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-2">研究聲明：資料真實性與演算法驗證邊界</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-2">
+                        為秉持學術嚴謹性，本專題特此說明資料來源界線。本系統中之 <strong>ESP32 即時濕度擷取、API 上傳通訊、前端網頁渲染，以及 LINE 主動警報觸發</strong>，皆為實體感測器 100% 真實運作之物理數據。
+                    </p>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        受限於專題初期硬體節點數量限制，Python 後端分析中之 <strong>「100x100m 大面積空間水文等高線圖」</strong>，係採用部分<span class="text-amber-400 font-bold">虛擬觀測站生成資料 (Simulated Data)</span> 作為演算法之概念驗證 (PoC)，旨在證明空間內插邏輯之正確性與未來規模化之潛力。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 實務困境與工程突破 -->
+    <section class="py-24 bg-white border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-element">
+                <span class="text-brand-500 font-bold tracking-wider mb-2 block">CHALLENGES & SOLUTIONS</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">實務困境與工程突破</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal-element">
+                <div class="content-card p-8 border-t-4 border-t-rose-500 flex flex-col h-full">
+                    <div class="mb-4 text-rose-500 text-3xl"><i class="fa-solid fa-ruler-combined"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">困境一：感測器該插多深？</h3>
+                    <p class="text-slate-600 text-sm mb-4 font-bold">❌ 痛點：插太淺易受表面蒸發干擾；插太深則無法反映植物真實吸水狀況。</p>
+                    <div class="mt-auto bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <h4 class="font-bold text-brand-600 text-sm mb-2">💡 工程解決方案：鎖定「有效根系帶」</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            針對草皮類，探針嚴格埋設於深 <strong>5~10 公分</strong> 處；若為灌木類則深埋至 <strong>15~20 公分</strong>。此外，安裝時必須將周圍土壤壓實，杜絕「空氣隙」造成的介電常數誤判。
+                        </p>
+                    </div>
+                </div>
+                <div class="content-card p-8 border-t-4 border-t-tech-500 flex flex-col h-full">
+                    <div class="mb-4 text-tech-500 text-3xl"><i class="fa-solid fa-faucet-drip"></i></div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">困境二：如何澆出完美弧線且不浪費？</h3>
+                    <p class="text-slate-600 text-sm mb-4 font-bold">❌ 痛點：傳統水管直射會破壞土壤結構，且水花四濺導致漫流浪費。</p>
+                    <div class="mt-auto bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <h4 class="font-bold text-brand-600 text-sm mb-2">💡 工程解決方案：流體拋體計算與微型噴嘴</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            將噴嘴仰角設定在 <strong>30°~45°</strong> 以獲得最佳抗風弧線。並改採公式運算：<code>啟動時間(t) = 需水體積(V) / 馬達流量(Q)</code>，搭配微型噴嘴緩慢滲透，達到 100% 根部吸收。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌟 8. 新增：市場競品差異分析 (Competitive Analysis) 🌟 -->
+    <section class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-element">
+                <span class="text-indigo-500 font-bold tracking-wider mb-2 block">COMPETITIVE ANALYSIS</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">市場競品差異分析</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">為什麼不買市面上的現成產品？本系統四大維度輾壓傳統商業方案。</p>
+            </div>
+            
+            <div class="content-card overflow-hidden reveal-element">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th class="p-5 font-bold text-slate-600 border-b border-slate-200 w-1/4">比較維度</th>
+                                <th class="p-5 font-bold text-slate-400 border-b border-slate-200 w-1/4">市售/網購傳統監測器</th>
+                                <th class="p-5 font-bold text-brand-600 border-b border-slate-200 w-1/2 bg-brand-50/50">TKU ENV-PLATFORM (本系統)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-5 font-bold text-slate-700">感測器壽命技術</td>
+                                <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>傳統電阻式 (易電解生鏽)</td>
+                                <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>高精度電容式，無金屬裸露，抗腐蝕壽命極長</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-5 font-bold text-slate-700">網路與生態系</td>
+                                <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>單機藍牙 / 需綁定昂貴專屬閘道器</td>
+                                <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>全開源架構，利用 ThingSpeak 免費雲端，具備無限擴充性</td>
+                            </tr>
+                            <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
+                                <td class="p-5 font-bold text-slate-700">警報與閉環控制</td>
+                                <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>被動觀看 App、不會自動澆水</td>
+                                <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>繼電器自動閉環澆灌，且由底層直推 LINE 警報 (無需中介伺服器)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="p-5 font-bold text-slate-700">數據分析深度</td>
+                                <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>僅顯示單點當下數值</td>
+                                <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>結合 Python 進行空間內插微水文建模與自然蒸散 (ET) 預測</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. 系統導入效益 -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 text-center reveal-element">
+            <h2 class="text-3xl font-bold text-slate-900 mb-12">系統導入之成果效益</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-tech-50 text-tech-500 flex items-center justify-center text-3xl mb-4"><i class="fa-solid fa-hand-holding-droplet"></i></div>
+                    <div class="text-4xl font-black text-slate-800 mb-2">40<span class="text-xl">%+</span></div>
+                    <h4 class="font-bold text-slate-700 mb-2">水資源節省率</h4>
+                    <p class="text-sm text-slate-500">透過閉環式閾值控制，徹底根除傳統定時澆水在雨天造成的溢流浪費。</p>
+                </div>
+                <div class="p-6">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center text-3xl mb-4"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div class="text-4xl font-black text-slate-800 mb-2">24<span class="text-xl">/7</span></div>
+                    <h4 class="font-bold text-slate-700 mb-2">全自動無人值守</h4>
+                    <p class="text-sm text-slate-500">系統自動巡迴監測，遇異常由 LINE 主動推播，將校園巡視人力成本降至零。</p>
+                </div>
+                <div class="p-6">
+                    <div class="w-20 h-20 mx-auto rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-3xl mb-4"><i class="fa-solid fa-seedling"></i></div>
+                    <div class="text-4xl font-black text-slate-800 mb-2">Max</div>
+                    <h4 class="font-bold text-slate-700 mb-2">植栽健康與存活率</h4>
+                    <p class="text-sm text-slate-500">避免人為判斷導致的「缺水枯萎」與「澆水過量爛根」，維持最佳田間容水量。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. 校方賦能與未來藍圖 -->
+    <section class="py-24 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-element">
+                <span class="text-indigo-500 font-bold tracking-wider mb-2 block">CAMPUS APPLICATION & FUTURE ROADMAP</span>
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">校方落地應用與系統進化藍圖</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">這不僅是一份專題，而是為淡江大學永續發展量身打造的解決方案。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 reveal-element">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-800 border-b-2 border-indigo-500 inline-block pb-2"><i class="fa-solid fa-school mr-2"></i>校方賦能場景</h3>
+                    <div class="content-card p-6 border-l-4 border-indigo-500">
+                        <h4 class="font-bold text-indigo-700 mb-2">1. 總務處：智慧校園節能減碳 (ESG)</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            淡江校區廣大，傳統維護耗費鉅額水費與人力。本系統可協助總務處將花圃升級為自動化管理，落實綠色校園政策。
+                        </p>
+                    </div>
+                    <div class="content-card p-6 border-l-4 border-blue-500">
+                        <h4 class="font-bold text-blue-700 mb-2">2. 水環系：微氣候教學與觀測網</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            長期收集的高解析度數據，可作為師生的教學材料。用於研究校園地表逕流、微地形蒸散量等學術實證分析。
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold text-slate-800 border-b-2 border-emerald-500 inline-block pb-2"><i class="fa-solid fa-rocket mr-2"></i>未來系統進化</h3>
+                    <div class="content-card p-6 border-l-4 border-emerald-500">
+                        <h4 class="font-bold text-emerald-700 mb-2">1. 導入 LoRaWAN 長距離通訊架構</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            突破 Wi-Fi 覆蓋限制。未來升級將採用低功耗廣域網路 (LoRa)，一個閘道器即可涵蓋整個淡水校園，實現大規模節點聯網。
+                        </p>
+                    </div>
+                    <div class="content-card p-6 border-l-4 border-amber-500">
+                        <h4 class="font-bold text-amber-700 mb-2">2. AI 預測模型整合</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            於雲端導入機器學習 (如 LSTM 時間序列預測)。若 AI 預測即將降雨，系統將強制停止馬達作動，達到最高段的智慧決策。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. 總結 -->
+    <section class="py-20 bg-slate-900 border-t border-slate-800 text-white">
+        <div class="max-w-4xl mx-auto px-6 text-center reveal-element">
+            <h2 class="text-2xl font-bold mb-6">跨域整合的極致展現</h2>
+            <p class="text-slate-400 leading-relaxed mb-8">
+                本專題突破了傳統環境工程的框架，將 <strong class="text-brand-400">硬體組裝、韌體開發、雲端建置、Web 視覺化、流體計算以及大數據分析</strong> 完美揉合。成功為淡江大學打造出一套具備商業價值、高擴充性的永續水資源管理平台。
+            </p>
+            <div class="inline-flex items-center gap-3 text-sm font-bold text-slate-500 tracking-widest">
+                <i class="fa-solid fa-circle text-brand-500 text-[10px]"></i> TKU ENVIRONMENTAL PLATFORM 2026
+            </div>
+        </div>
+    </section>
+
+    <!-- 捲動動畫腳本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            });
+
+            document.querySelectorAll('.reveal-element').forEach((el) => {
+                observer.observe(el);
+            });
+            
+            setTimeout(() => {
+                const firstElement = document.querySelectorAll('.reveal-element')[0];
+                if(firstElement) firstElement.classList.add('active');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
