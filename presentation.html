@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>淡江大學環境平台 | 智慧土壤溼度檢測系統</title>
     
-    <!-- 引入 Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入 FontAwesome 圖示 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- 引入 Noto Sans TC 字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
     <script>
@@ -60,6 +57,7 @@
             overflow: hidden;
             background: #e2e8f0;
             box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+            position: relative;
         }
         .img-container img {
             width: 100%;
@@ -74,7 +72,6 @@
 </head>
 <body class="antialiased">
 
-    <!-- 導覽列 -->
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <div class="font-bold tracking-wider text-slate-800">
@@ -84,7 +81,6 @@
         </div>
     </nav>
 
-    <!-- 1. 封面 -->
     <section class="min-h-screen flex items-center pt-20 bg-gradient-to-b from-white to-slate-50">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-element">
             <div>
@@ -113,7 +109,6 @@
         </div>
     </section>
 
-    <!-- 2. 硬體架構解剖 -->
     <section id="architecture" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6 space-y-16">
             <div class="text-center reveal-element">
@@ -157,12 +152,11 @@
         </div>
     </section>
 
-    <!-- 3. 軟體架構解剖 -->
     <section class="py-24 bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto px-6 space-y-16">
             <div class="text-center reveal-element">
                 <h2 class="text-3xl font-bold text-white mb-4">數位維度：軟體平台與演算法職責</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">軟體是賦予硬體靈魂的關鍵。從韌體控制、雲端儲存到資料分析，各司其職。</p>
+                <p class="text-slate-400 max-w-2xl mx-auto">軟體是賦予硬體靈魂的關鍵。從韌體控制、雲端儲存到大數據分析，各司其職。</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center reveal-element">
                 <div class="space-y-6 order-2 lg:order-1">
@@ -198,7 +192,6 @@
         </div>
     </section>
 
-    <!-- 4. 高階資料科學 -->
     <section class="py-24 bg-slate-50 border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal-element">
@@ -227,7 +220,6 @@
         </div>
     </section>
 
-    <!-- 5. LIVE DEMO -->
     <section id="live-demo" class="py-24 bg-[#0a0f1c] text-white relative overflow-hidden">
         <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
         <div class="max-w-7xl mx-auto px-6 relative z-10 reveal-element">
@@ -250,16 +242,12 @@
                     <div class="mx-auto flex items-center gap-2 px-4 py-1.5 bg-slate-900 rounded-md text-xs font-mono text-slate-400 border border-slate-700/50">
                         <i class="fa-solid fa-lock text-[10px]"></i> makem2296-crypto.github.io/tk-env-platform
                     </div>
-                    <a href="https://makem2296-crypto.github.io/tk-env-platform/" target="_blank" class="text-xs text-slate-400 hover:text-white transition flex items-center gap-1">
-                        新開分頁 <i class="fa-solid fa-external-link-alt"></i>
-                    </a>
                 </div>
                 <iframe src="https://makem2296-crypto.github.io/tk-env-platform/" class="w-full h-full pt-12 bg-slate-900" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <!-- 6. 資料真實性與演算法驗證聲明 -->
     <section class="py-16 bg-slate-800 text-white border-y border-slate-700">
         <div class="max-w-6xl mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center gap-8 reveal-element">
@@ -267,19 +255,18 @@
                     <i class="fa-solid fa-microscope"></i>
                 </div>
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2">研究聲明：資料真實性與演算法驗證邊界</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">研究聲明：資料真實性與驗證邊界</h3>
                     <p class="text-slate-400 text-sm leading-relaxed mb-2">
-                        為秉持學術嚴謹性，本專題特此說明資料來源界線。本系統中之 <strong>ESP32 即時濕度擷取、API 上傳通訊、前端網頁渲染，以及 LINE 主動警報觸發</strong>，皆為實體感測器 100% 真實運作之物理數據。
+                        本系統中之 <strong>ESP32 即時濕度擷取、API 上傳通訊、前端網頁渲染，以及 LINE 主動警報觸發</strong>，皆為實體感測器 100% 真實運作之物理數據。
                     </p>
                     <p class="text-slate-400 text-sm leading-relaxed">
-                        受限於專題初期硬體節點數量限制，Python 後端分析中之 <strong>「100x100m 大面積空間水文等高線圖」</strong>，係採用部分<span class="text-amber-400 font-bold">虛擬觀測站生成資料 (Simulated Data)</span> 作為演算法之概念驗證 (PoC)，旨在證明空間內插邏輯之正確性與未來規模化之潛力。
+                        受限於專題初期硬體節點數量限制，Python 後端分析中所展示之 <strong>「100x100m 大面積空間水文等高線圖」</strong>，係採用部分虛擬觀測站生成資料 作為演算法之概念驗證 (PoC)，旨在證明空間內插邏輯之正確性與未來規模化之潛力。
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 7. 實務困境與工程突破 -->
     <section class="py-24 bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal-element">
@@ -313,7 +300,6 @@
         </div>
     </section>
 
-    <!-- 🌟 8. 新增：市場競品差異分析 (Competitive Analysis) 🌟 -->
     <section class="py-24 bg-slate-50 border-b border-slate-200">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 reveal-element">
@@ -328,14 +314,14 @@
                         <thead>
                             <tr class="bg-slate-100">
                                 <th class="p-5 font-bold text-slate-600 border-b border-slate-200 w-1/4">比較維度</th>
-                                <th class="p-5 font-bold text-slate-400 border-b border-slate-200 w-1/4">市售/網購傳統監測器</th>
+                                <th class="p-5 font-bold text-slate-400 border-b border-slate-200 w-1/4">傳統電阻監測器</th>
                                 <th class="p-5 font-bold text-brand-600 border-b border-slate-200 w-1/2 bg-brand-50/50">TKU ENV-PLATFORM (本系統)</th>
                             </tr>
                         </thead>
                         <tbody class="text-sm">
                             <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
-                                <td class="p-5 font-bold text-slate-700">感測器壽命技術</td>
-                                <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>傳統電阻式 (易電解生鏽)</td>
+                                <td class="p-5 font-bold text-slate-700">感測器壽命</td>
+                                <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>電阻式 (易電解生鏽)</td>
                                 <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>高精度電容式，無金屬裸露，抗腐蝕壽命極長</td>
                             </tr>
                             <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
@@ -344,7 +330,7 @@
                                 <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>全開源架構，利用 ThingSpeak 免費雲端，具備無限擴充性</td>
                             </tr>
                             <tr class="border-b border-slate-100 hover:bg-slate-50 transition">
-                                <td class="p-5 font-bold text-slate-700">警報與閉環控制</td>
+                                <td class="p-5 font-bold text-slate-700">警報與控制</td>
                                 <td class="p-5 text-slate-500"><i class="fa-solid fa-xmark text-rose-400 mr-2"></i>被動觀看 App、不會自動澆水</td>
                                 <td class="p-5 font-medium text-slate-800 bg-brand-50/30"><i class="fa-solid fa-check text-brand-500 mr-2 text-lg"></i>繼電器自動閉環澆灌，且由底層直推 LINE 警報 (無需中介伺服器)</td>
                             </tr>
@@ -360,7 +346,6 @@
         </div>
     </section>
 
-    <!-- 9. 系統導入效益 -->
     <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6 text-center reveal-element">
             <h2 class="text-3xl font-bold text-slate-900 mb-12">系統導入之成果效益</h2>
@@ -381,19 +366,17 @@
                     <div class="w-20 h-20 mx-auto rounded-full bg-amber-50 text-amber-500 flex items-center justify-center text-3xl mb-4"><i class="fa-solid fa-seedling"></i></div>
                     <div class="text-4xl font-black text-slate-800 mb-2">Max</div>
                     <h4 class="font-bold text-slate-700 mb-2">植栽健康與存活率</h4>
-                    <p class="text-sm text-slate-500">避免人為判斷導致的「缺水枯萎」與「澆水過量爛根」，維持最佳田間容水量。</p>
+                    <p class="text-sm text-slate-500">避免人為判斷導致的枯萎與爛根，維持最佳田間容水量。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 10. 校方賦能與未來藍圖 -->
     <section class="py-24 bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 reveal-element">
                 <span class="text-indigo-500 font-bold tracking-wider mb-2 block">CAMPUS APPLICATION & FUTURE ROADMAP</span>
                 <h2 class="text-3xl font-bold text-slate-900 mb-4">校方落地應用與系統進化藍圖</h2>
-                <p class="text-slate-500 max-w-2xl mx-auto">這不僅是一份專題，而是為淡江大學永續發展量身打造的解決方案。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 reveal-element">
                 <div class="space-y-6">
@@ -401,7 +384,7 @@
                     <div class="content-card p-6 border-l-4 border-indigo-500">
                         <h4 class="font-bold text-indigo-700 mb-2">1. 總務處：智慧校園節能減碳 (ESG)</h4>
                         <p class="text-sm text-slate-600 leading-relaxed">
-                            淡江校區廣大，傳統維護耗費鉅額水費與人力。本系統可協助總務處將花圃升級為自動化管理，落實綠色校園政策。
+                            校區廣大，傳統維護耗費鉅額水費與人力。本系統可協助總務處將花圃升級為自動化管理，落實綠色校園政策。
                         </p>
                     </div>
                     <div class="content-card p-6 border-l-4 border-blue-500">
@@ -430,20 +413,92 @@
         </div>
     </section>
 
-    <!-- 11. 總結 -->
-    <section class="py-20 bg-slate-900 border-t border-slate-800 text-white">
-        <div class="max-w-4xl mx-auto px-6 text-center reveal-element">
-            <h2 class="text-2xl font-bold mb-6">跨域整合的極致展現</h2>
-            <p class="text-slate-400 leading-relaxed mb-8">
-                本專題突破了傳統環境工程的框架，將 <strong class="text-brand-400">硬體組裝、韌體開發、雲端建置、Web 視覺化、流體計算以及大數據分析</strong> 完美揉合。成功為淡江大學打造出一套具備商業價值、高擴充性的永續水資源管理平台。
+    <section class="py-24 bg-gradient-to-br from-[#022c22] via-[#064e3b] to-[#0f172a] text-white relative overflow-hidden border-b border-slate-800">
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[100px]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10 reveal-element text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-brand-300 text-sm font-bold tracking-widest mb-6 border border-white/20">
+                <i class="fa-solid fa-globe"></i> ROAD TO 2026 SDG ASIA
+            </div>
+            
+            <h2 class="text-4xl md:text-5xl font-black mb-8 leading-tight text-white drop-shadow-md">
+                邁向 8 月亞太永續博覽會<br>
+                <span class="text-teal-300 drop-shadow-lg">從校園實作，走向國際 ESG 解決方案</span>
+            </h2>
+            <p class="text-lg text-slate-300 max-w-3xl mx-auto mb-16 leading-relaxed">
+                本系統模組正積極進行「商轉產品化 (Productization)」，預計於今年 8 月正式登陸 <strong class="text-white">亞太永續博覽會 (SDG Asia)</strong>，向產業界展示我們的核心價值：響應聯合國 SDG 6 精準給水、賦能企業 ESG 確切省水數據，尋求模組化 PoC 的商轉機會。
             </p>
-            <div class="inline-flex items-center gap-3 text-sm font-bold text-slate-500 tracking-widest">
-                <i class="fa-solid fa-circle text-brand-500 text-[10px]"></i> TKU ENVIRONMENTAL PLATFORM 2026
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition flex items-start gap-6">
+                        <div class="w-12 h-12 rounded-full bg-blue-500/20 text-blue-400 flex flex-shrink-0 items-center justify-center text-xl">
+                            <i class="fa-solid fa-droplet"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">對齊聯合國 SDG 6</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">響應「淨水及衛生」目標。展示低成本 IoT 節點如何大幅提升精準農業與都市綠化的水資源使用效率。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition flex items-start gap-6">
+                        <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex flex-shrink-0 items-center justify-center text-xl">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">企業 ESG 數據賦能</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">為企業永續報告書提供具備時間戳記、可被稽核的確切省水數據，量化 ESG 績效。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition flex items-start gap-6">
+                        <div class="w-12 h-12 rounded-full bg-amber-500/20 text-amber-400 flex flex-shrink-0 items-center justify-center text-xl">
+                            <i class="fa-solid fa-box-open"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">模組化商轉潛力</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed">將在此次展覽中尋求企業合作與 PoC (概念驗證) 機會。計畫將系統封裝成「隨插即用」的黑盒子套件，讓缺乏 IT 人力的場域輕鬆導入。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 reveal-element">
+                    <div class="img-container border border-slate-700/50 rounded-3xl bg-[#0a0f1c] p-2 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] relative group">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="實體模擬展示模型" class="rounded-2xl object-cover h-[450px] w-full opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                        
+                        <div class="absolute top-[15%] left-6 bg-black/70 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs text-emerald-400 font-mono flex items-center gap-2 shadow-lg hover:scale-110 transition cursor-default">
+                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 模擬景觀建築
+                        </div>
+                        <div class="absolute top-[45%] right-6 bg-black/70 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs text-blue-400 font-mono flex items-center gap-2 shadow-lg hover:scale-110 transition cursor-default">
+                            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span> 地面與土壤剖面
+                        </div>
+                        <div class="absolute bottom-[25%] left-6 bg-black/70 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs text-amber-400 font-mono flex items-center gap-2 shadow-lg hover:scale-110 transition cursor-default">
+                            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> 隱藏線路
+                        </div>
+                        <div class="absolute bottom-[10%] right-8 bg-black/70 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-xs text-rose-400 font-mono flex items-center gap-2 shadow-lg hover:scale-110 transition cursor-default">
+                            <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span> 抽水器與馬達
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-white/5 border border-white/10 rounded-xl p-4 text-left">
+                        <p class="text-sm font-bold text-teal-300 mb-2"><i class="fa-solid fa-cube mr-2"></i>預計實體沙盤模型 (Prototype)</p>
+                        <p class="text-xs text-slate-400 leading-relaxed">
+                            依照手繪設計稿，展場將展示一座完整的<strong>微縮實境沙盤</strong>。包含景觀建築、地面土壤、隱藏式管線，以及實際運作的抽水與感測器，100% 視覺化還原系統。
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- 捲動動畫腳本 -->
+    <section class="py-12 bg-[#09090b] text-center text-slate-500 text-sm border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-6 reveal-element">
+            <div class="inline-flex items-center gap-3 font-bold tracking-widest mb-4">
+                <i class="fa-solid fa-circle text-brand-500 text-[10px]"></i> TKU ENVIRONMENTAL PLATFORM 2026
+            </div>
+            <p>本專題突破了傳統環境工程框架，將硬體、韌體、雲端與資料科學完美揉合。<br>感謝指導教授與研發團隊，我們 8 月亞太永續展見！</p>
+        </div>
+    </section>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
